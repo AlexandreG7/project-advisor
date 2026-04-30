@@ -25,13 +25,13 @@ WORKDIR /app
 
 # Install PHP dependencies (separate layer for cache efficiency)
 COPY composer.json composer.lock* ./
-RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 
 # Copy application source
 COPY . .
 
-# Finalize autoloader (runs post-install scripts including symfony/runtime)
-RUN composer install --no-dev --prefer-dist --optimize-autoloader \
+# Generate optimized autoloader (triggers symfony/runtime via post-autoload-dump, skips symfony-cmd auto-scripts)
+RUN COMPOSER_ALLOW_SUPERUSER=1 composer dump-autoload --optimize \
     && mkdir -p var/cache var/log \
     && chmod -R 777 var/
 
