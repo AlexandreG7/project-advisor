@@ -1,0 +1,104 @@
+{
+  "rules": [
+    {
+      "id": "rule_001",
+      "name": "SEO critique → SSR obligatoire",
+      "condition": {"features": ["seo"], "project_type": ["blog", "ecommerce", "landing"]},
+      "boost": {"tags": ["ssr", "ssg"], "ids": ["nextjs", "nuxt", "astro", "sveltekit"], "amount": 1.5},
+      "penalty": {"ids": ["react", "vue", "angular"], "amount": 1.5}
+    },
+    {
+      "id": "rule_002",
+      "name": "Débutant → frameworks à convention forte",
+      "condition": {"level": "beginner"},
+      "boost": {"ids": ["nextjs", "nuxt", "laravel", "django"], "amount": 1.5},
+      "penalty": {"ids": ["gin", "nestjs", "angular"], "amount": 2.0}
+    },
+    {
+      "id": "rule_003",
+      "name": "Paiement → compatibilité Stripe",
+      "condition": {"features": ["payment"]},
+      "boost": {"tags": ["stripe"], "ids": ["nextjs", "nuxt", "laravel", "django"], "amount": 1.2}
+    },
+    {
+      "id": "rule_004",
+      "name": "Performance critique → runtime rapide",
+      "condition": {"objective": "performance"},
+      "boost": {"ids": ["astro", "sveltekit", "gin", "fastapi"], "amount": 1.8},
+      "penalty": {"ids": ["django", "rails"], "amount": 0.8}
+    },
+    {
+      "id": "rule_005",
+      "name": "Temps réel → support websockets",
+      "condition": {"features": ["realtime"]},
+      "boost": {"ids": ["nestjs", "sveltekit", "nextjs"], "amount": 1.3},
+      "penalty": {"ids": ["astro"], "amount": 2.0}
+    },
+    {
+      "id": "rule_006",
+      "name": "Hébergement gratuit → compatibilité Vercel/Netlify",
+      "condition": {"hosting_budget": "free"},
+      "boost": {"hosting_compatible": ["vercel", "netlify"], "amount": 1.5}
+    },
+    {
+      "id": "rule_007",
+      "name": "E-commerce → maturité et écosystème",
+      "condition": {"project_type": "ecommerce"},
+      "boost": {"ids": ["nextjs", "nuxt", "laravel"], "amount": 1.4}
+    },
+    {
+      "id": "rule_008",
+      "name": "SaaS Dashboard → features complètes",
+      "condition": {"project_type": "saas"},
+      "boost": {"ids": ["nextjs", "nuxt", "nestjs", "laravel"], "amount": 1.3}
+    },
+    {
+      "id": "rule_009",
+      "name": "Développement rapide → convention over config",
+      "condition": {"priority": "speed-to-market"},
+      "boost": {"ids": ["nextjs", "laravel", "nuxt", "django", "rails"], "amount": 1.4},
+      "penalty": {"ids": ["angular", "symfony"], "amount": 1.2}
+    },
+    {
+      "id": "rule_010",
+      "name": "Équipe expérimentée → architecture scalable",
+      "condition": {"level": "advanced"},
+      "boost": {"ids": ["nestjs", "symfony", "gin", "remix"], "amount": 1.3},
+      "penalty": {"ids": ["expressjs"], "amount": 0.8}
+    },
+    {
+      "id": "rule_011",
+      "name": "Blog/Contenu statique → performance ultra",
+      "condition": {"content_type": "static", "project_type": ["blog", "documentation"]},
+      "boost": {"ids": ["astro", "sveltekit"], "amount": 1.6},
+      "penalty": {"ids": ["nextjs"], "amount": 0.9}
+    },
+    {
+      "id": "rule_012",
+      "name": "Prototype rapide → batteries-included",
+      "condition": {"timeline": "urgent", "project_type": ["mvp", "prototype"]},
+      "boost": {"ids": ["django", "laravel", "nextjs"], "amount": 1.4},
+      "penalty": {"ids": ["symfony", "gin"], "amount": 1.2}
+    },
+    {
+      "id": "rule_013",
+      "name": "Enterprise → support et scalabilité",
+      "condition": {"project_scale": "enterprise"},
+      "boost": {"ids": ["angular", "symfony", "nestjs"], "amount": 1.5},
+      "penalty": {"ids": ["astro", "expressjs"], "amount": 2.0}
+    },
+    {
+      "id": "rule_014",
+      "name": "Microservices → frameworks légers",
+      "condition": {"architecture": "microservices"},
+      "boost": {"ids": ["gin", "fastapi", "nestjs", "expressjs"], "amount": 1.4}
+    },
+    {
+      "id": "rule_015",
+      "name": "Intégration ML → Python préféré",
+      "condition": {"features": ["ml", "ai"]},
+      "boost": {"ids": ["fastapi", "django"], "amount": 1.6},
+      "penalty": {"ids": ["expressjs", "gin"], "amount": 1.2}
+    }
+  ]
+}

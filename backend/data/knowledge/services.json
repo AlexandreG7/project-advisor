@@ -1,0 +1,512 @@
+{
+  "services": {
+    "auth": {
+      "category": "Utilisateurs & Sécurité",
+      "icon": "🔐",
+      "label": "Authentification",
+      "by_language": {
+        "javascript": {
+          "name": "Auth.js (NextAuth)",
+          "doc_link": "https://authjs.dev",
+          "narrative": "Auth.js est le standard pour l'authentification en JavaScript. Il gère OAuth, sessions, JWT et s'intègre nativement avec Next.js, SvelteKit ou Express. Open-source et gratuit, avec une communauté massive."
+        },
+        "python": {
+          "name": "Django Allauth / FastAPI Users",
+          "doc_link": "https://docs.allauth.org",
+          "narrative": "Django Allauth couvre l'authentification complète : inscription, login social, email de vérification. Pour FastAPI, FastAPI-Users offre un setup similaire avec OAuth2 et JWT intégrés."
+        },
+        "php": {
+          "name": "Laravel Sanctum / Symfony Security",
+          "doc_link": "https://laravel.com/docs/sanctum",
+          "narrative": "Laravel Sanctum gère tokens API et sessions avec élégance. Pour Symfony, le composant Security offre un système d'authentification très flexible avec firewalls et providers."
+        },
+        "go": {
+          "name": "Go JWT + middleware custom",
+          "doc_link": "https://github.com/golang-jwt/jwt",
+          "narrative": "En Go, l'approche standard est un middleware JWT custom avec golang-jwt. Léger, performant, et donne un contrôle total sur le flow d'authentification."
+        },
+        "ruby": {
+          "name": "Devise",
+          "doc_link": "https://github.com/heartcombo/devise",
+          "narrative": "Devise est LA solution d'authentification pour Rails. Inscription, login, récupération de mot de passe, confirmation par email — tout est inclus et configurable."
+        }
+      },
+      "default": {
+        "name": "Clerk",
+        "doc_link": "https://clerk.com",
+        "narrative": "Clerk offre une authentification clé-en-main : UI pré-construite, OAuth, MFA, gestion d'organisations. Idéal quand on veut se concentrer sur le produit plutôt que sur l'auth."
+      },
+      "alternatives": ["Auth0", "Supabase Auth", "Firebase Auth", "Clerk"]
+    },
+    "roles": {
+      "category": "Utilisateurs & Sécurité",
+      "icon": "🛡️",
+      "label": "Rôles & permissions",
+      "by_language": {
+        "javascript": {
+          "name": "CASL",
+          "doc_link": "https://casl.js.org",
+          "narrative": "CASL est la référence JavaScript pour la gestion de permissions. Isomorphe (fonctionne côté client et serveur), il permet de définir des abilities granulaires avec une API intuitive."
+        },
+        "python": {
+          "name": "Django Guardian / Casbin",
+          "doc_link": "https://django-guardian.readthedocs.io",
+          "narrative": "Django Guardian ajoute des permissions par objet à Django. Pour des besoins RBAC/ABAC plus complexes, Casbin offre un moteur de policies multi-modèle."
+        }
+      },
+      "default": {
+        "name": "Casbin",
+        "doc_link": "https://casbin.org",
+        "narrative": "Casbin est un moteur d'autorisation multi-langage supportant RBAC, ABAC et ACL. Disponible en Go, JS, Python, Java — il s'adapte à n'importe quelle stack."
+      },
+      "alternatives": ["Oso", "Permit.io", "Auth0 FGA"]
+    },
+    "oauth": {
+      "category": "Utilisateurs & Sécurité",
+      "icon": "🔗",
+      "label": "Connexion sociale",
+      "by_language": {},
+      "default": {
+        "name": "Auth.js / Clerk",
+        "doc_link": "https://authjs.dev",
+        "narrative": "Auth.js supporte 70+ providers OAuth (Google, GitHub, Apple, Discord…). Setup en quelques lignes. Si tu veux du plug-and-play avec UI, Clerk offre des composants pré-construits."
+      },
+      "alternatives": ["Auth0", "Firebase Auth", "Supabase Auth"]
+    },
+    "mfa": {
+      "category": "Utilisateurs & Sécurité",
+      "icon": "📱",
+      "label": "Double authentification",
+      "by_language": {},
+      "default": {
+        "name": "Clerk / Auth0",
+        "doc_link": "https://clerk.com/docs/authentication/configuration/sign-up-sign-in-options#multi-factor-authentication",
+        "narrative": "Pour la 2FA, les solutions managées comme Clerk ou Auth0 sont recommandées : TOTP, SMS, WebAuthn/Passkeys intégrés. Construire un flow MFA from scratch est complexe et risqué niveau sécurité."
+      },
+      "alternatives": ["Twilio Verify (SMS)", "speakeasy (TOTP)"]
+    },
+    "db_relational": {
+      "category": "Données & Stockage",
+      "icon": "🗃️",
+      "label": "Base de données relationnelle",
+      "by_language": {},
+      "default": {
+        "name": "PostgreSQL",
+        "doc_link": "https://www.postgresql.org",
+        "narrative": "PostgreSQL est le choix par défaut pour toute application sérieuse. Robuste, performant, supporte JSON, full-text search, extensions. Gratuit, open-source, et standard de l'industrie."
+      },
+      "alternatives": ["MySQL", "PlanetScale (MySQL serverless)", "SQLite (prototypage)"]
+    },
+    "db_nosql": {
+      "category": "Données & Stockage",
+      "icon": "📄",
+      "label": "Base NoSQL",
+      "by_language": {},
+      "default": {
+        "name": "MongoDB",
+        "doc_link": "https://docs.mongodb.com",
+        "narrative": "MongoDB est le leader NoSQL documentaire. Schéma flexible, requêtes JavaScript natives, Atlas cloud gratuit. Idéal pour des données à structure variable ou des prototypes rapides."
+      },
+      "alternatives": ["DynamoDB (AWS)", "Firestore", "CouchDB"]
+    },
+    "cache": {
+      "category": "Données & Stockage",
+      "icon": "⚡",
+      "label": "Cache haute performance",
+      "by_language": {},
+      "default": {
+        "name": "Redis / Upstash",
+        "doc_link": "https://redis.io",
+        "narrative": "Redis est incontournable pour le cache applicatif : sessions, rate limiting, queues, pub/sub. Upstash offre un Redis serverless avec tier gratuit généreux, parfait pour les projets Vercel."
+      },
+      "alternatives": ["Memcached", "Valkey", "Dragonfly"]
+    },
+    "file_storage": {
+      "category": "Données & Stockage",
+      "icon": "📁",
+      "label": "Stockage de fichiers",
+      "by_language": {
+        "javascript": {
+          "name": "UploadThing + S3/R2",
+          "doc_link": "https://uploadthing.com",
+          "narrative": "UploadThing simplifie l'upload de fichiers en TypeScript avec un SDK type-safe. Pour le stockage, Cloudflare R2 offre un compatible S3 sans frais d'egress — bien moins cher qu'AWS S3."
+        }
+      },
+      "default": {
+        "name": "AWS S3 / Cloudflare R2",
+        "doc_link": "https://developers.cloudflare.com/r2",
+        "narrative": "Cloudflare R2 est l'alternative économique à S3 : compatible S3 API, 0 frais d'egress, tier gratuit de 10 Go. Pour les gros volumes, AWS S3 reste la référence avec un écosystème complet."
+      },
+      "alternatives": ["Supabase Storage", "Minio (self-hosted)", "DigitalOcean Spaces"]
+    },
+    "payment": {
+      "category": "Paiements & Commerce",
+      "icon": "💳",
+      "label": "Paiement en ligne",
+      "by_language": {},
+      "default": {
+        "name": "Stripe",
+        "doc_link": "https://stripe.com/docs",
+        "narrative": "Stripe est le leader incontesté du paiement en ligne. API élégante, documentation exemplaire, dashboard admin complet. Supporte cartes, SEPA, Apple Pay, Google Pay. SDK disponible pour tous les langages."
+      },
+      "alternatives": ["Paddle (simplifie la TVA)", "LemonSqueezy", "PayPal"]
+    },
+    "subscription": {
+      "category": "Paiements & Commerce",
+      "icon": "🔄",
+      "label": "Abonnements récurrents",
+      "by_language": {},
+      "default": {
+        "name": "Stripe Billing",
+        "doc_link": "https://stripe.com/docs/billing",
+        "narrative": "Stripe Billing gère tout le cycle d'abonnement : plans, périodes d'essai, prorata, relance de paiement, portail client. Intégration parfaite avec le reste de l'écosystème Stripe."
+      },
+      "alternatives": ["Paddle", "Chargebee", "Recurly"]
+    },
+    "marketplace": {
+      "category": "Paiements & Commerce",
+      "icon": "🏪",
+      "label": "Marketplace multi-vendeurs",
+      "by_language": {},
+      "default": {
+        "name": "Stripe Connect",
+        "doc_link": "https://stripe.com/docs/connect",
+        "narrative": "Stripe Connect permet de créer une marketplace avec paiements split entre vendeurs et plateforme. Gère le KYC, les virements, et le reporting fiscal pour chaque vendeur."
+      },
+      "alternatives": ["PayPal for Marketplaces", "Mangopay"]
+    },
+    "invoicing": {
+      "category": "Paiements & Commerce",
+      "icon": "🧾",
+      "label": "Facturation & devis",
+      "by_language": {},
+      "default": {
+        "name": "Stripe Invoicing",
+        "doc_link": "https://stripe.com/docs/invoicing",
+        "narrative": "Stripe Invoicing génère des factures conformes, avec suivi de paiement et relances automatiques. Pour des besoins comptables avancés, l'API s'intègre facilement avec votre ERP."
+      },
+      "alternatives": ["Lago (open-source)", "FreshBooks API"]
+    },
+    "email_transactional": {
+      "category": "Communication",
+      "icon": "✉️",
+      "label": "Email transactionnel",
+      "by_language": {},
+      "default": {
+        "name": "Resend",
+        "doc_link": "https://resend.com",
+        "narrative": "Resend est le nouveau standard pour l'email transactionnel : API moderne, React Email pour des templates type-safe, excellent taux de délivrabilité. Tier gratuit de 3 000 emails/mois."
+      },
+      "alternatives": ["Postmark", "SendGrid", "AWS SES (moins cher à volume)"]
+    },
+    "notifications_push": {
+      "category": "Communication",
+      "icon": "🔔",
+      "label": "Notifications push",
+      "by_language": {},
+      "default": {
+        "name": "OneSignal / Novu",
+        "doc_link": "https://onesignal.com",
+        "narrative": "OneSignal gère les notifications push web et mobile avec segmentation avancée. Novu offre une approche open-source unifiée (push, email, SMS, in-app) avec un système de workflows."
+      },
+      "alternatives": ["Firebase Cloud Messaging", "Knock", "MagicBell"]
+    },
+    "sms": {
+      "category": "Communication",
+      "icon": "📲",
+      "label": "SMS",
+      "by_language": {},
+      "default": {
+        "name": "Twilio",
+        "doc_link": "https://www.twilio.com/docs",
+        "narrative": "Twilio est la plateforme de référence pour les SMS programmatiques. API simple, couverture mondiale, vérifié pour l'authentification. SDK disponible dans tous les langages majeurs."
+      },
+      "alternatives": ["Vonage", "MessageBird", "AWS SNS"]
+    },
+    "chat": {
+      "category": "Communication",
+      "icon": "💬",
+      "label": "Chat temps réel",
+      "by_language": {},
+      "default": {
+        "name": "Stream / Ably",
+        "doc_link": "https://getstream.io",
+        "narrative": "Stream offre une API de chat complète avec UI pré-construite, modération, et threading. Ably fournit l'infrastructure pub/sub temps réel sous-jacente si tu veux construire from scratch."
+      },
+      "alternatives": ["Socket.io (self-hosted)", "PubNub", "SendBird"]
+    },
+    "cms": {
+      "category": "Contenu & Médias",
+      "icon": "📄",
+      "label": "CMS / Éditeur de contenu",
+      "by_language": {
+        "javascript": {
+          "name": "Payload CMS / Sanity",
+          "doc_link": "https://payloadcms.com",
+          "narrative": "Payload CMS est un headless CMS open-source en TypeScript — self-hosted, type-safe, et extensible. Sanity offre une alternative cloud avec un éditeur temps réel collaboratif et un tier gratuit généreux."
+        }
+      },
+      "default": {
+        "name": "Strapi / Sanity",
+        "doc_link": "https://strapi.io",
+        "narrative": "Strapi est le CMS headless open-source le plus populaire. Self-hosted, extensible, avec une API REST/GraphQL auto-générée. Sanity offre une alternative cloud avec collaboration temps réel."
+      },
+      "alternatives": ["Contentful", "Directus", "Keystatic"]
+    },
+    "blog": {
+      "category": "Contenu & Médias",
+      "icon": "✍️",
+      "label": "Blog intégré",
+      "by_language": {
+        "javascript": {
+          "name": "MDX + Next.js / Astro",
+          "doc_link": "https://mdxjs.com",
+          "narrative": "MDX combine Markdown et composants React — parfait pour un blog technique. Avec Next.js ou Astro, le contenu est statiquement généré pour un SEO et des performances optimales."
+        }
+      },
+      "default": {
+        "name": "Ghost / Markdown + SSG",
+        "doc_link": "https://ghost.org",
+        "narrative": "Ghost est un CMS spécialisé blog : éditeur riche, newsletters, membership, SEO. En alternative, un générateur de sites statiques avec Markdown offre performance maximale et simplicité."
+      },
+      "alternatives": ["WordPress (API)", "Hashnode", "Notion API"]
+    },
+    "media_upload": {
+      "category": "Contenu & Médias",
+      "icon": "🖼️",
+      "label": "Upload d'images / vidéos",
+      "by_language": {},
+      "default": {
+        "name": "Cloudinary",
+        "doc_link": "https://cloudinary.com",
+        "narrative": "Cloudinary gère upload, transformation, optimisation et CDN d'images/vidéos en un seul service. Redimensionnement automatique, détection de visages, formats modernes (WebP, AVIF). Tier gratuit de 25 crédits/mois."
+      },
+      "alternatives": ["Imgix", "Cloudflare Images", "Uploadcare"]
+    },
+    "pdf": {
+      "category": "Contenu & Médias",
+      "icon": "📑",
+      "label": "Génération de PDF",
+      "by_language": {
+        "javascript": {
+          "name": "React PDF / Puppeteer",
+          "doc_link": "https://react-pdf.org",
+          "narrative": "@react-pdf/renderer permet de créer des PDFs avec des composants React — comme du JSX. Pour des PDF depuis du HTML, Puppeteer génère des captures pixel-perfect via un navigateur headless."
+        },
+        "python": {
+          "name": "WeasyPrint / ReportLab",
+          "doc_link": "https://weasyprint.org",
+          "narrative": "WeasyPrint convertit du HTML/CSS en PDF de haute qualité. ReportLab offre un contrôle total sur la mise en page pour des rapports complexes."
+        }
+      },
+      "default": {
+        "name": "Puppeteer / wkhtmltopdf",
+        "doc_link": "https://pptr.dev",
+        "narrative": "Puppeteer génère des PDFs parfaits depuis du HTML en utilisant Chrome headless. Idéal pour des factures, rapports, ou certificats avec un design web précis."
+      },
+      "alternatives": ["jsPDF", "PDFKit", "Prince"]
+    },
+    "search": {
+      "category": "Recherche & IA",
+      "icon": "🔍",
+      "label": "Recherche full-text",
+      "by_language": {},
+      "default": {
+        "name": "Meilisearch / Typesense",
+        "doc_link": "https://www.meilisearch.com",
+        "narrative": "Meilisearch offre une recherche instantanée, tolérante aux typos, avec filtres et facettes — le tout open-source et self-hostable. Typesense est une excellente alternative avec un cloud managé."
+      },
+      "alternatives": ["Algolia (SaaS)", "Elasticsearch", "PostgreSQL FTS (simple)"]
+    },
+    "ai_llm": {
+      "category": "Recherche & IA",
+      "icon": "🤖",
+      "label": "IA / Chatbot (LLM)",
+      "by_language": {
+        "javascript": {
+          "name": "Vercel AI SDK + OpenAI / Anthropic",
+          "doc_link": "https://sdk.vercel.ai",
+          "narrative": "Le Vercel AI SDK standardise l'intégration de LLMs en TypeScript : streaming, tool calling, RAG. Fonctionne avec OpenAI, Anthropic, Google, et modèles locaux (Ollama)."
+        },
+        "python": {
+          "name": "LangChain + OpenAI / Anthropic",
+          "doc_link": "https://python.langchain.com",
+          "narrative": "LangChain est le framework Python de référence pour l'orchestration de LLMs : chaînes, agents, RAG, mémoire. S'intègre avec tous les providers (OpenAI, Anthropic, local)."
+        }
+      },
+      "default": {
+        "name": "OpenAI API / Anthropic API",
+        "doc_link": "https://platform.openai.com/docs",
+        "narrative": "L'API OpenAI (GPT-4) ou Anthropic (Claude) offre des capacités de génération de texte, résumé, classification, et conversation. Intégration simple via SDK dans tous les langages."
+      },
+      "alternatives": ["Google Gemini", "Mistral AI", "Ollama (local, gratuit)"]
+    },
+    "ai_recommendations": {
+      "category": "Recherche & IA",
+      "icon": "🎯",
+      "label": "Recommandations personnalisées",
+      "by_language": {},
+      "default": {
+        "name": "pgvector + embeddings",
+        "doc_link": "https://github.com/pgvector/pgvector",
+        "narrative": "pgvector ajoute la recherche vectorielle à PostgreSQL. Combiné avec des embeddings (OpenAI, Cohere), il permet des recommandations sémantiques sans infrastructure supplémentaire."
+      },
+      "alternatives": ["Pinecone", "Weaviate", "Qdrant"]
+    },
+    "websockets": {
+      "category": "Temps Réel",
+      "icon": "⚡",
+      "label": "Temps réel (WebSockets)",
+      "by_language": {
+        "javascript": {
+          "name": "Socket.io / Ably",
+          "doc_link": "https://socket.io",
+          "narrative": "Socket.io est le standard Node.js pour le temps réel : reconnexion automatique, rooms, namespaces. Pour du managé sans serveur, Ably ou Pusher offrent une infrastructure pub/sub scalable."
+        }
+      },
+      "default": {
+        "name": "Ably / Pusher",
+        "doc_link": "https://ably.com",
+        "narrative": "Ably fournit une infrastructure temps réel managée : pub/sub, presence, historique. Scalable à des millions de connexions simultanées sans gérer de serveur WebSocket."
+      },
+      "alternatives": ["Supabase Realtime", "Soketi (self-hosted)", "Centrifugo"]
+    },
+    "collaborative": {
+      "category": "Temps Réel",
+      "icon": "👥",
+      "label": "Édition collaborative",
+      "by_language": {},
+      "default": {
+        "name": "Liveblocks / Yjs",
+        "doc_link": "https://liveblocks.io",
+        "narrative": "Liveblocks offre des primitives de collaboration temps réel : presence, curseurs, storage synchronisé. Yjs est l'alternative open-source basée sur les CRDTs pour une synchronisation sans conflit."
+      },
+      "alternatives": ["PartyKit", "Automerge", "ShareDB"]
+    },
+    "video_streaming": {
+      "category": "Temps Réel",
+      "icon": "🎬",
+      "label": "Streaming vidéo",
+      "by_language": {},
+      "default": {
+        "name": "Mux",
+        "doc_link": "https://www.mux.com",
+        "narrative": "Mux est l'API vidéo de référence : upload, encoding adaptatif, streaming HLS, analytics. Utilisé par des géants comme Robinhood et Notion. Pricing au temps de visionnage."
+      },
+      "alternatives": ["Cloudflare Stream", "AWS MediaConvert", "Bunny Stream"]
+    },
+    "analytics": {
+      "category": "Analytics & Visibilité",
+      "icon": "📈",
+      "label": "Analytics produit",
+      "by_language": {},
+      "default": {
+        "name": "PostHog",
+        "doc_link": "https://posthog.com",
+        "narrative": "PostHog est un analytics produit open-source tout-en-un : events, funnels, session replay, feature flags, A/B testing. Self-hostable ou cloud avec tier gratuit de 1M events/mois."
+      },
+      "alternatives": ["Mixpanel", "Amplitude", "Plausible (web analytics simple)"]
+    },
+    "dashboards": {
+      "category": "Analytics & Visibilité",
+      "icon": "📊",
+      "label": "Tableaux de bord",
+      "by_language": {
+        "javascript": {
+          "name": "Recharts / Tremor",
+          "doc_link": "https://recharts.org",
+          "narrative": "Recharts offre des graphiques React composables et responsives. Tremor va plus loin avec des composants dashboard pré-construits (KPIs, sparklines, tables) sur Tailwind CSS."
+        }
+      },
+      "default": {
+        "name": "Chart.js / Metabase",
+        "doc_link": "https://www.chartjs.org",
+        "narrative": "Chart.js est la librairie de graphiques la plus populaire : légère, framework-agnostic, grande variété de charts. Metabase offre des dashboards BI complets connectés à votre base sans code."
+      },
+      "alternatives": ["D3.js (avancé)", "Apache Superset", "Grafana"]
+    },
+    "seo": {
+      "category": "Analytics & Visibilité",
+      "icon": "🔎",
+      "label": "SEO critique",
+      "by_language": {
+        "javascript": {
+          "name": "Next.js SSR/SSG + next-sitemap",
+          "doc_link": "https://nextjs.org/docs/app/building-your-application/optimizing/metadata",
+          "narrative": "Next.js est idéal pour le SEO : SSR/SSG, metadata API, sitemap automatique, Image optimization. Combiné avec next-sitemap et des balises Open Graph, votre contenu sera parfaitement indexé."
+        }
+      },
+      "default": {
+        "name": "SSR/SSG framework + sitemap",
+        "doc_link": "https://developers.google.com/search/docs",
+        "narrative": "Pour un SEO critique, le Server-Side Rendering ou Static Site Generation est essentiel. Ajoutez un sitemap.xml, des balises meta dynamiques, du schema.org, et un bon score Lighthouse."
+      },
+      "alternatives": ["Astro (contenu statique)", "Nuxt (Vue SSR)", "SvelteKit SSR"]
+    },
+    "i18n": {
+      "category": "Analytics & Visibilité",
+      "icon": "🌍",
+      "label": "Multi-langue (i18n)",
+      "by_language": {
+        "javascript": {
+          "name": "next-intl / react-i18next",
+          "doc_link": "https://next-intl-docs.vercel.app",
+          "narrative": "next-intl s'intègre nativement avec Next.js App Router : routing par locale, traductions type-safe, formatage de dates et nombres. react-i18next est l'alternative universelle pour tout projet React."
+        }
+      },
+      "default": {
+        "name": "Framework i18n natif + Crowdin",
+        "doc_link": "https://crowdin.com",
+        "narrative": "Chaque framework a son propre système i18n. Crowdin ou Lokalise gèrent la traduction collaborative avec des traducteurs, de l'auto-traduction IA, et la synchronisation avec votre repo Git."
+      },
+      "alternatives": ["FormatJS", "Phrase", "Lokalise"]
+    },
+    "cicd": {
+      "category": "DevOps & Qualité",
+      "icon": "🔄",
+      "label": "CI/CD automatisé",
+      "by_language": {},
+      "default": {
+        "name": "GitHub Actions",
+        "doc_link": "https://docs.github.com/en/actions",
+        "narrative": "GitHub Actions est intégré nativement à GitHub : workflows YAML, marketplace d'actions, matrix builds, secrets managés. Gratuit pour les repos publics, 2 000 min/mois en privé."
+      },
+      "alternatives": ["GitLab CI", "CircleCI", "Buildkite"]
+    },
+    "monitoring": {
+      "category": "DevOps & Qualité",
+      "icon": "📡",
+      "label": "Monitoring & alertes",
+      "by_language": {},
+      "default": {
+        "name": "Sentry + Better Stack",
+        "doc_link": "https://sentry.io",
+        "narrative": "Sentry capture les erreurs en temps réel avec stack traces, breadcrumbs, et performance monitoring. Better Stack (ex-Logtail) ajoute le logging centralisé et l'uptime monitoring."
+      },
+      "alternatives": ["Datadog (enterprise)", "New Relic", "Grafana Cloud (open-source)"]
+    },
+    "testing": {
+      "category": "DevOps & Qualité",
+      "icon": "🧪",
+      "label": "Tests automatisés",
+      "by_language": {
+        "javascript": {
+          "name": "Vitest + Playwright",
+          "doc_link": "https://vitest.dev",
+          "narrative": "Vitest remplace Jest avec une vitesse native Vite et une compatibilité API Jest. Playwright gère les tests E2E multi-navigateurs avec auto-waiting, trace viewer, et génération de code."
+        },
+        "python": {
+          "name": "pytest + Playwright",
+          "doc_link": "https://docs.pytest.org",
+          "narrative": "pytest est le framework de test Python standard : fixtures, parametrize, plugins. Playwright Python couvre les tests E2E navigateur avec la même puissance que la version JS."
+        }
+      },
+      "default": {
+        "name": "Framework de test natif + Playwright",
+        "doc_link": "https://playwright.dev",
+        "narrative": "Utilisez le framework de test natif de votre langage pour les tests unitaires et d'intégration. Playwright gère les tests E2E avec support multi-navigateurs et un excellent debugging."
+      },
+      "alternatives": ["Cypress (E2E)", "Jest", "Storybook (composants)"]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+FROM php:8.4-fpm-alpine
+
+# System packages + PHP extensions
+RUN apk add --no-cache \
+        nginx \
+        supervisor \
+        curl \
+        gettext \
+        postgresql-dev \
+        icu-dev \
+        libzip-dev \
+    && docker-php-ext-install \
+        pdo \
+        pdo_pgsql \
+        pdo_sqlite \
+        intl \
+        zip \
+        opcache
+
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /app
+
+# Install PHP dependencies (separate layer for cache efficiency)
+COPY composer.json composer.lock* ./
+RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
+
+# Copy application source
+COPY . .
+
+# Finalize autoloader
+RUN composer dump-autoload --optimize \
+    && mkdir -p var/cache var/log \
+    && chmod -R 777 var/
+
+# Startup script
+RUN chmod +x docker/start.sh
+
+EXPOSE 8080
+
+CMD ["/bin/sh", "/app/docker/start.sh"]
