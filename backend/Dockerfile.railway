@@ -30,8 +30,8 @@ RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist
 # Copy application source
 COPY . .
 
-# Finalize autoloader
-RUN composer dump-autoload --optimize \
+# Finalize autoloader (runs post-install scripts including symfony/runtime)
+RUN composer install --no-dev --prefer-dist --optimize-autoloader \
     && mkdir -p var/cache var/log \
     && chmod -R 777 var/
 
